@@ -1,7 +1,11 @@
+# Number Guessing Game
+# Computer picks a random number between 1 and 100.
+# User guesses until they get it right, with hints if too high/low.
 import random
 # import random: this tells python we want to use the standard library module named random.
 # that module contains functions for gathering random numbers, which we need so the game choses a different number each run.
 secret_number = random.randint(1,100)
+# Store the number once so it doesn't change every guess. 
 # random.radint(1,100): returns an integer including both endpoints 1 and 100. 
 # we store the returned value in the variable secret_number so the program can compare the players guesses to this value later. 
 # we use a variable because we need that same number avalible accross multiple steps in the program (not re-generating it each time).
@@ -16,13 +20,25 @@ while True:
     try:
 # converts guess to integer 
         guess = int(raw)
-        break
-    # break is how you escape that infinate loop when the user finally gives valid input. 
-    # if you forget break or place it outside the try block, the loop will either run forever or stop unexpectedly. 
+
     except ValueError:
         print("Please enter a whole number like 42.")
+        continue
+    # continue jumps back to the start of the loop. 
 # int() tries to convert its argument to an integer value. int("42) -> 42
 # after this line, the varible raw no longer holds a string - it holds an integer.
-
-print(f"You guessed {guess}.")
+# if the user types something that can't be converted to an integer (like "hello" or "3.14"), int() will raise a ValueError exception.
+    print(f"You guessed {guess}.")
 # f-strings automatically converts the value to a string when inserting {guess} and are easier to read. 
+
+    if guess < secret_number:
+        print("Sorry too low.")
+# if states if the guess is less than the secret number, it'll print "Sorry too low."
+    elif guess > secret_number:
+        print("Sorry too high.")
+# elif states if the guess is greater than the secret number, it'll print "Sorry too high."
+    else:
+        print("CONGRATS! You guessed it right!")
+# for else, since both "if" and "elif" are false, the only possible outcome would be guess == secret_number.
+# keep in mind that you don't need to write "else guess == secret_number" as this would cause an error. 
+        break 
