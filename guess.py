@@ -5,6 +5,7 @@ import random
 # import random: this tells python we want to use the standard library module named random.
 # that module contains functions for gathering random numbers, which we need so the game choses a different number each run.
 secret_number = random.randint(1,100)
+attempts = 0 # initialize attempts counter
 # Store the number once so it doesn't change every guess. 
 # random.radint(1,100): returns an integer including both endpoints 1 and 100. 
 # we store the returned value in the variable secret_number so the program can compare the players guesses to this value later. 
@@ -20,6 +21,7 @@ while True:
     try:
 # converts guess to integer 
         guess = int(raw)
+        attempts += 1 # increment here after valid input
 
     except ValueError:
         print("Please enter a whole number like 42.")
@@ -38,7 +40,8 @@ while True:
         print("Sorry too high.")
 # elif states if the guess is greater than the secret number, it'll print "Sorry too high."
     else:
-        print("CONGRATS! You guessed it right!")
+        print(f"CONGRATS! You guessed it right in {attempts} attempts!")
 # for else, since both "if" and "elif" are false, the only possible outcome would be guess == secret_number.
 # keep in mind that you don't need to write "else guess == secret_number" as this would cause an error. 
         break 
+# break exits the loop.
